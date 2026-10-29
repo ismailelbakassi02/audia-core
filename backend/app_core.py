@@ -18,11 +18,18 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
 
-from compliance_engine import (
-    validate_luhn_siren, validate_deterministic_tva, validate_paf_tripartite,
-    calculate_risk_score, compute_sha256, compute_block_hash
-)
-from report_generator import generate_invoice_pdf, generate_sealed_audit_certificate
+try:
+    from compliance_engine import (
+        validate_luhn_siren, validate_deterministic_tva, validate_paf_tripartite,
+        calculate_risk_score, compute_sha256, compute_block_hash
+    )
+    from report_generator import generate_invoice_pdf, generate_sealed_audit_certificate
+except ImportError:
+    from backend.compliance_engine import (
+        validate_luhn_siren, validate_deterministic_tva, validate_paf_tripartite,
+        calculate_risk_score, compute_sha256, compute_block_hash
+    )
+    from backend.report_generator import generate_invoice_pdf, generate_sealed_audit_certificate
 
 # -----------------------------------------------------------------------------
 # Configuration & Security
